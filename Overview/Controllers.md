@@ -61,23 +61,25 @@ export class CatsController {
 }
 ```
 
-> **힌트** > `@types/express` 패키지를 설치하면 위 예제처럼 `request: Request` 와 같이 `express` 에 관한 타입을 명시할 수 있다.
+> **힌트**
+> `@types/express` 패키지를 설치하면 위 예제처럼 `request: Request` 와 같이 `express` 에 관한 타입을 명시할 수 있다.
 
 요청 객체는 HTTP 요청을 나타내고 쿼리 스트링(Query string), 매개변수(Parameter), HTTP 헤더(Header), HTTP 바디(Body)에 관한 속성을 가진다.
 
-| @Request(), @Req()      | req                             |
-| ----------------------- | ------------------------------- |
-| @Response(), @Res() \*  | res                             |
-| @Next()                 | next                            |
-| @Session()              | req.session                     |
-| @Param(key?: string)    | req.params / req.params[key]    |
-| @Body(key?: string)     | req.body / req.body[key]        |
-| @Query(key?: string)    | req.query / req.query[key]      |
-| @Headers(name?: string) | req.headers / req.headers[name] |
-| @Ip()                   | req.ip                          |
-| @HostParam()            | req.hosts                       |
+| Nest                         | Library-specific                  |
+| ---------------------------- | --------------------------------- |
+| `@Request(), @Req()`         | `req`                             |
+| `@Response(), @Res()` **\*** | `res`                             |
+| `@Next()`                    | `next`                            |
+| `@Session()`                 | `req.session`                     |
+| `@Param(key?: string)`       | `req.params / req.params[key]`    |
+| `@Body(key?: string)`        | `req.body / req.body[key]`        |
+| `@Query(key?: string)`       | `req.query / req.query[key]`      |
+| `@Headers(name?: string)`    | `req.headers / req.headers[name]` |
+| `@Ip()`                      | `req.ip`                          |
+| `@HostParam()`               | `req.hosts`                       |
 
-**\*** 기반 HTTP 플랫폼**(**Express와 Fastify) 간의 타입 호환성을 위해, Nest는 `@Res()`와 `@Response()` 데코레이터를 제공한다. `@Res()`는 단순히 `@Response()`의 줄임말이다. 둘 다 기반 네이티브 플랫폼 `response` 객체에 직접 접근할 수 있도록 한다. 이들을 사용할 때, 기반 라이브러리를 위한 타입들(예: `@types/express`) 또한 임포트(Import)시키는 것이 좋다. 기억해야할 것은 메소드 핸들러에서 @Res() 또는 @Response()를 주입하면 Nest가 해당 핸들러에 한해서 **Library-specific** 모드로 된다는 것이다. 이러한 경우 개발자에게 응답을 관리해야할 책임이 있다. 즉 반드시 개발자가 직접 `response` 객체에 대한 호출(예: `res.json(…)` )등을 하면서 응답을 관리해야 한다. 그렇지 않는 경우 HTTP 서버는 중단될 수 있다.
+**\*** 기반 HTTP 플랫폼 (**Express** 와 **Fastify**) 간의 타입 호환성을 위해, Nest는 `@Res()`와 `@Response()` 데코레이터를 제공한다. `@Res()`는 단순히 `@Response()`의 줄임말이다. 둘 다 기반 네이티브 플랫폼 `response` 객체에 직접 접근할 수 있도록 한다. 이들을 사용할 때, 기반 라이브러리를 위한 타입들(예: `@types/express`) 또한 임포트(Import)시키는 것이 좋다. 기억해야할 것은 메소드 핸들러에서 `@Res()` 또는 `@Response()`를 주입하면 Nest가 해당 핸들러에 한해서 **Library-specific** 모드로 된다는 것이다. 이러한 경우 개발자에게 응답을 관리해야할 책임이 있다. 즉 반드시 개발자가 직접 `response` 객체에 대한 호출(예: `res.json(…)` )등을 하면서 응답을 관리해야 한다. 그렇지 않는 경우 HTTP 서버는 중단될 수 있다.
 
 ### 응답(Resources)
 
@@ -128,7 +130,8 @@ create() {
 }
 ```
 
-> **힌트** > `@nestjs/common` 패키지에서 `HttpCode`를 임포트하면 된다.
+> **힌트**
+> `@nestjs/common` 패키지에서 `HttpCode`를 임포트하면 된다.
 
 종종, 상태 코드는 정적이진 않지만 다양한 요인에 따라 달라질 수 있다. 이러한 경우, `@Res()` 를 사용해 주입한 Library-specific **응답** 객체를 사용할 수 있다. (또는, 에러의 경우, 예외를 던질 수 있다.)
 
@@ -144,7 +147,8 @@ create() {
 }
 ```
 
-> **힌트** > `@nestjs/common` 패키지에서 `Header`를 임포트하면 된다.
+> **힌트**
+> `@nestjs/common` 패키지에서 `Header`를 임포트하면 된다.
 
 ### 리다이렉션(Redirection)
 
@@ -192,7 +196,8 @@ findOne(@Param() params): string {
 
 `@Param()` 은 메소드의 구현체 안에서 메소드 매개변수를 사용할 수 있도록 한다. 위 코드에서 봤듯이, `params.id` 를 통해 매개변수 `id` 에 접근할 수 있다. 만약 특정 매개변수 토큰을 전달한다면, 메소드 구현체에서 직접 라우트 매개변수의 이름으로 참조할 수 있다.
 
-> **힌트** > `@nestjs/common` 패키지에서 `Param`를 임포트하면 된다.
+> **힌트**
+> `@nestjs/common` 패키지에서 `Param`를 임포트하면 된다.
 
 ```tsx
 @Get(':id')
@@ -229,7 +234,7 @@ export class AccountController {
 }
 ```
 
-### 비동기성(\***\*Asynchronicity\*\***)
+### 비동기성(Asynchronicity)
 
 우리는 현대 JavaScript를 사랑하기 때문에 대부분의 데이터는 **비동기적으로** 교환되는 것을 안다. 이는 왜 Nest가 `async` 함수들을 지원하고 함수들과 잘 동작하는가에 대한 이유다.
 
@@ -267,7 +272,8 @@ async create(@Body() createCatDto: CreateCatDto) {
 }
 ```
 
-> **힌트** > `ValidationPipe` 는 메소드 핸들러가 받으면 안되는 속성들을 필터링 한다. 이러한 경우, 받을 수 있는 속성들은 화이트리스트로 작성할 수 있는데 자동적으로 화이트리스트에 없는 속성은 결과 객체에서 제거된다. `CreateCatDto` 를 예로 들면, 우리는 `name`, `age`, 그리고 `breed` 속성을 화이트리스트로 작성할 수 있다.
+> **힌트**
+> `ValidationPipe` 는 메소드 핸들러가 받으면 안되는 속성들을 필터링 한다. 이러한 경우, 받을 수 있는 속성들은 화이트리스트로 작성할 수 있는데 자동적으로 화이트리스트에 없는 속성은 결과 객체에서 제거된다. `CreateCatDto` 를 예로 들면, 우리는 `name`, `age`, 그리고 `breed` 속성을 화이트리스트로 작성할 수 있다.
 
 ### 완성본
 
