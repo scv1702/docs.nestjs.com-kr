@@ -61,7 +61,8 @@ export class CatsController {
 }
 ```
 
-> **힌트** > `@types/express` 패키지를 설치하면 위 예제처럼 `request: Request` 와 같이 `express` 에 관한 타입을 명시할 수 있다.
+> **힌트**
+> `@types/express` 패키지를 설치하면 위 예제처럼 `request: Request` 와 같이 `express` 에 관한 타입을 명시할 수 있다.
 
 요청 객체는 HTTP 요청을 나타내고 쿼리 스트링(Query string), 매개변수(Parameter), HTTP 헤더(Header), HTTP 바디(Body)에 관한 속성을 가진다.
 
@@ -129,7 +130,8 @@ create() {
 }
 ```
 
-> **힌트** > `@nestjs/common` 패키지에서 `HttpCode`를 임포트하면 된다.
+> **힌트** 
+> `@nestjs/common` 패키지에서 `HttpCode`를 임포트하면 된다.
 
 종종, 상태 코드는 정적이진 않지만 다양한 요인에 따라 달라질 수 있다. 이러한 경우, `@Res()` 를 사용해 주입한 Library-specific **응답** 객체를 사용할 수 있다. (또는, 에러의 경우, 예외를 던질 수 있다.)
 
@@ -145,7 +147,8 @@ create() {
 }
 ```
 
-> **힌트** > `@nestjs/common` 패키지에서 `Header`를 임포트하면 된다.
+> **힌트**
+> `@nestjs/common` 패키지에서 `Header`를 임포트하면 된다.
 
 ### 리다이렉션(Redirection)
 
@@ -193,7 +196,8 @@ findOne(@Param() params): string {
 
 `@Param()` 은 메소드의 구현체 안에서 메소드 매개변수를 사용할 수 있도록 한다. 위 코드에서 봤듯이, `params.id` 를 통해 매개변수 `id` 에 접근할 수 있다. 만약 특정 매개변수 토큰을 전달한다면, 메소드 구현체에서 직접 라우트 매개변수의 이름으로 참조할 수 있다.
 
-> **힌트** > `@nestjs/common` 패키지에서 `Param`를 임포트하면 된다.
+> **힌트** 
+> `@nestjs/common` 패키지에서 `Param`를 임포트하면 된다.
 
 ```tsx
 @Get(':id')
@@ -216,7 +220,7 @@ export class AdminController {
 }
 ```
 
-> **주의**
+> **주의** 
 > **Fastify**는 중첩 라우터에 대한 지원이 부족하기 때문에, 서브-도메인 라우팅을 할 때 Express 어댑터가 대신 사용되어야 한다.
 
 라우트의 `path` 와 비슷하게, `host` 옵션은 토큰을 사용해 호스트 네임에서 해당 위치의 동적 데이터를 가져올 수 있다. `@Controller` 데코레이터의 호스트 매개변수 토큰은 다음과 같이 사용 가능하다. 이런 방식으로 정의된 호스트 매개변수는 `@HostParam()` 데코레이터를 사용해 접근할 수 있는데, 이는 메소드 시그니쳐에 추가되어야 한다.
@@ -269,7 +273,8 @@ async create(@Body() createCatDto: CreateCatDto) {
 }
 ```
 
-> **힌트** > `ValidationPipe` 는 메소드 핸들러가 받으면 안되는 속성들을 필터링 한다. 이러한 경우, 받을 수 있는 속성들은 화이트리스트로 작성할 수 있는데 자동적으로 화이트리스트에 없는 속성은 결과 객체에서 제거된다. `CreateCatDto` 를 예로 들면, 우리는 `name`, `age`, 그리고 `breed` 속성을 화이트리스트로 작성할 수 있다.
+> **힌트** 
+> `ValidationPipe` 는 메소드 핸들러가 받으면 안되는 속성들을 필터링 한다. 이러한 경우, 받을 수 있는 속성들은 화이트리스트로 작성할 수 있는데 자동적으로 화이트리스트에 없는 속성은 결과 객체에서 제거된다. `CreateCatDto` 를 예로 들면, 우리는 `name`, `age`, 그리고 `breed` 속성을 화이트리스트로 작성할 수 있다.
 
 ### 완성본
 
